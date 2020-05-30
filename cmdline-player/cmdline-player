@@ -182,7 +182,8 @@ Choose a window to record and start playing back all of KTHW:
 
 Create a single screencast recording:
 
-  $ $(basename "$0") 
+  $ $(basename "$0") install-mokctl-linux.scr
+
 EnD
 }
 
