@@ -57,7 +57,7 @@ Send a Pull Request to add to this list.
    
    The classic remade for MOK. A 7 node cluster without blowing up your laptop!
 
-5. Multi Node
+5. [Multi Node](/docs/multinode.md)
    
    Build a bigger cluster using our package.
 
