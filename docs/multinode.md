@@ -109,6 +109,20 @@ myk8s-worker-8   NotReady   <none>   4m3s    v1.18.3
 
 The eighth worker did not get set up correctly. It could be fixed manually or the cluster deleted and the creation tried again. The worker nodes are created quite fast, so a delay, waiting until all services are started, would help here. As would being able to add and delete worker nodes after a cluster is built. On faster machines this might not be an issue until even larger clusters are created, so it does need fixing. Both suggested fixes are relatively straight forward to implement so when I need it I will do it, unless someone else does it first :)
 
+> Actually, when I went to delete the cluster I found that Podman was broken, with "too many watched files". The error was:
+> 
+> "Error: error creating libpod runtime: error configuring CNI network plugin: could not create new watcher too many open files"
+> 
+> And to be able to delete the cluster I had to increase the max_user_instances:
+> 
+> `echo "256"> /proc/sys/fs/inotify/max_user_instances`
+> 
+> This is a temporary fix, until the computer is rebooted. I will probably make it permanent later using sysctl.
+> 
+> I then re-ran the create cluster command and it worked without error. This makes sense for my laptop since I have OwnCloud running, which establishes a number of watches for all my owncloud directories.
+> 
+> All 9 'nodes' were up and ready within 2 minutes.
+
 That's it!
 
 ## What's Next
