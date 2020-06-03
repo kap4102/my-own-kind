@@ -69,6 +69,6 @@ Send a Pull Request to add to this list.
    
    We can install any version of kubernetes. Let's try installing an older cluster and upgrading it.
 
-7. Add-ons
+7. [Add-ons](/docs/addons.md)
    
    Trying popluar kubernetes add-ons.

@@ -14,12 +14,12 @@ grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
 
 As an alternative to installing `mokctl`, container image that has `mokctl`, `kubectl` and `docker` already installed, then `exec` into the instance to build kubernetes clusters.
 
-Download and run the container image, [myownkind/workbox](https://hub.docker.com/repository/docker/myownkind/workbox):
+Download and run the container image, [myownkind/mokbox](https://hub.docker.com/repository/docker/myownkind/mokbox):
 
 ```bash
-docker run --rm -ti --hostname workbox --name workbox \
+docker run --rm -ti --hostname mokbox --name mokbox \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /var/tmp:/var/tmp myownkind/workbox
+  -v /var/tmp:/var/tmp myownkind/mokbox
 ```
 
 ```bash
@@ -37,12 +37,12 @@ kubectl get pods -A
 Add the following to your shell startup file, for example `~/.bashrc` or `~/.zshrc`:
 
 ```bash
-alias workbox='docker run --rm -ti --hostname workbox --name workbox -v /var/run/docker.sock:/var/run/docker.sock -v /var/tmp:/var/tmp myownkind/workbox';
+alias mokbox='docker run --rm -ti --hostname mokbox --name mokbox -v /var/run/docker.sock:/var/run/docker.sock -v /var/tmp:/var/tmp myownkind/mokbox';
 ```
 
-Then run the work container using: `workbox`.
+Then run the work container using: `mokbox`.
 
-The base image is Fedora. Additional software can be installed using `dnf`, or modify `my-own-kind/package/Dockerfile.workbox` and rebuild the image to have the same tools each time.
+The base image is Fedora. Additional software can be installed using `dnf`, or modify `my-own-kind/package/Dockerfile.mokbox` and rebuild the image to have the same tools each time.
 
 ## Install Mokctl using NPM
 
