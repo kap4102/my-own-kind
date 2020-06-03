@@ -1,5 +1,7 @@
 # Documentation
 
+* [Mokctl command help](/docs/man-mokctl.md).
+
 * [Frequently asked questions](faq.md).
 
 * [How to use the Parser library in your own project](parser.md).
