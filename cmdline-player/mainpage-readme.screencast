@@ -33,7 +33,7 @@ y
 # Create a real kubernetes cluster - This will take a few minutes!
 mokctl create -h
 mokctl create cluster myk8s 1 1
-export KUBECONFIG=~/.mok/admin.conf
+export KUBECONFIG=~/.mok/admin-myk8s.conf
 docker ps
 kubectl get pods -A
 kubectl get nodes

@@ -24,7 +24,7 @@ For testing multi-master with a front-end load balancer for the master 'nodes' o
 mokctl create cluster myk8s --with-lb --masters 2 --workers 1
 ```
 
-There is no limit to the number of workers or masters. The workers are set to talk to the load balancer 'node' rather than the masters, and the kubectl configuration file `/var/tmp/admin.conf` also points to the load balancer node. Then it's possible to see what happens when master node(s) are stopped and restarted.
+There is no limit to the number of workers or masters. The workers are set to talk to the load balancer 'node' rather than the masters, and the kubectl configuration file `/var/tmp/admin-myk8s.conf` also points to the load balancer node. Then it's possible to see what happens when master node(s) are stopped and restarted.
 
 For testing, say, pod placement strategies, only one master is required with no load balancer:
 
@@ -59,7 +59,7 @@ $ mokctl create cluster myk8s --masters 1 --workers 8
 
 Cluster, "myk8s", can be accessed using:
 
-export KUBECONFIG=/var/tmp/admin.conf
+export KUBECONFIG=/var/tmp/admin-myk8s.conf
 
 $
 ```

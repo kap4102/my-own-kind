@@ -1,10 +1,76 @@
-#### For Linux only
+# Linux Installation Options
 
-Fedora 32 removed docker and replaced it with [Podman](https://podman.io). Mokctl now supports Podman out-of-the-box and will choose Podman over Docker if both are installed.
+Either [Podman](https://podman.io/) or [Docker](https://www.docker.com/get-started) must be installed frst. If both are installed `mokctl` will choose to use Podman.
 
-Install Podman or Docker if one of them is not installed already.
+If your distribution enables cgroups v2 then it must be disabled. Only Fedora do this right now, so for Fedora 31 or 32 run the following line then reboot:
 
-Note for Fedora users: Cgroups2 needs to be disabled, see [Common F31 bugs - Fedora Project Wiki](https://fedoraproject.org/wiki/Common_F31_bugs#Docker_package_no_longer_available_and_will_not_run_by_default_.28due_to_switch_to_cgroups_v2.29), which amounts to typing the following command then rebooting: `sudo grubby --update-kernel=ALL --args=&quot;systemd.unified_cgroup_hierarchy=0&quot;`
+```bash
+grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+```
+
+> Note for Fedora users: Cgroups2 needs to be disabled, see [Common F31 bugs - Fedora Project Wiki](https://fedoraproject.org/wiki/Common_F31_bugs#Docker_package_no_longer_available_and_will_not_run_by_default_.28due_to_switch_to_cgroups_v2.29).
+
+## Use a Work Container
+
+As an alternative to installing `mokctl`, container image that has `mokctl`, `kubectl` and `docker` already installed, then `exec` into the instance to build kubernetes clusters.
+
+Download and run the container image, [myownkind/workbox](https://hub.docker.com/repository/docker/myownkind/workbox):
+
+```bash
+docker run --rm -ti --hostname workbox --name workbox \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /var/tmp:/var/tmp myownkind/workbox
+```
+
+```bash
+mokctl build image --get-prebuilt-image
+
+mokctl create cluster myk8s --masters 1
+
+export KUBECONFIG=/var/tmp/admin-myk8s.conf
+
+kubectl get pods -A
+```
+
+**Creating an Alias**
+
+Add the following to your shell startup file, for example `~/.bashrc` or `~/.zshrc`:
+
+```bash
+alias workbox='docker run --rm -ti --hostname workbox --name workbox -v /var/run/docker.sock:/var/run/docker.sock -v /var/tmp:/var/tmp myownkind/workbox';
+```
+
+Then run the work container using: `workbox`.
+
+The base image is Fedora. Additional software can be installed using `dnf`, or modify `my-own-kind/package/Dockerfile.workbox` and rebuild the image to have the same tools each time.
+
+## Install Mokctl using NPM
+
+Using this method will install the `mokctl` command into `/usr/local/bin`.
+
+Kubectl wil need to be downloaded separately.
+
+To install from npm:
+
+```bash
+sudo npm install -g my-own-kind
+```
+
+Then use `mokctl`:
+
+```bash
+alias mokctl="sudo mokctl"
+mokctl build image --get-prebuilt-image
+mokctl create cluster myk8s --masters 1
+```
+
+Removal
+
+```bash
+sudo npm uninstall -g my-own-kind
+```
+
+## Install from source
 
 To build and install from source:
 

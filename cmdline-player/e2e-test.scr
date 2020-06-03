@@ -13,7 +13,7 @@ mokctl build -h
 mokctl build image --get-prebuilt-image
 mokctl create -h
 mokctl create cluster myk8s 1 2
-export KUBECONFIG=/var/tmp/admin.conf
+export KUBECONFIG=/var/tmp/admin-myk8s.conf
 for i in {100..81}; do echo -n "$i.."; sleep 1; done; echo
 for i in {80..61}; do echo -n "$i.."; sleep 1; done; echo
 for i in {60..41}; do echo -n "$i.."; sleep 1; done; echo
@@ -35,7 +35,7 @@ mokctl get cluster
 mokctl build image
 mokctl create -h
 mokctl create cluster myk8s 1 0
-export KUBECONFIG=/var/tmp/admin.conf
+export KUBECONFIG=/var/tmp/admin-myk8s.conf
 for i in {80..61}; do echo -n "$i.."; sleep 1; done; echo
 for i in {60..41}; do echo -n "$i.."; sleep 1; done; echo
 for i in {40..21}; do echo -n "$i.."; sleep 1; done; echo

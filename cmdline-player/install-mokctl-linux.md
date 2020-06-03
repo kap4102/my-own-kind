@@ -12,7 +12,7 @@ alias mokctl="sudo mokctl"
 mokctl build image --get-prebuilt-image
 # Let's create a 7 node kubernetes cluster, this will take a couple minutes...
 mokctl create cluster myk8s --with-lb --masters 3 --workers 3
-export KUBECONFIG=/var/tmp/admin.conf
+export KUBECONFIG=/var/tmp/admin-myk8s.conf
 kubectl get pods -A
 for i in {10..1}; do echo -n "$i.."; sleep 1; done; echo
 kubectl get pods -A

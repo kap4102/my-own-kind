@@ -16,7 +16,7 @@ mokctl create
 # Don't set up the containers!
 mokctl create cluster test1 --skipmastersetup 1 1
 
-export KUBECONFIG=~/.mok/admin.conf
+export KUBECONFIG=~/.mok/admin-test1.conf
 # This won't work as containers weren't set up
 kubectl get pods -A
 mokctl get cluster

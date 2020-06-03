@@ -1,8 +1,10 @@
 # Documentation
 
-[Frequently asked questions](faq.md).
+* [Frequently asked questions](faq.md).
 
-[How to use the Parser library in your own project](parser.md).
+* [How to use the Parser library in your own project](parser.md).
+
+* [Troubleshooting](troubleshoot.md).
 
 ## Kubernetes the Hard Way - on your laptop
 
